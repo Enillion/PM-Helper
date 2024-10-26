@@ -1,0 +1,257 @@
+﻿<Window x:Class="PM_Helper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PM_Helper"
+        mc:Ignorable="d"
+        Title="Cisco PM Helper 1.3.3" Height="450" Width="800">
+    <Grid>        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0">
+            <TabItem Header="XTM to LCX metric Converter">
+                <StackPanel x:Name="ConvStack">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="120*"/>
+                            <ColumnDefinition Width="300*"/>
+                            <ColumnDefinition Width="120*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="12"/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="180"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="10"/>
+                            
+                        </Grid.RowDefinitions>
+                        
+                        <TextBlock Grid.Column="2" Grid.Row="1"
+                        Text="Location of chosen XTM generated ZIP or XLSX metric file:"                        
+                        Grid.ColumnSpan ="2"/>
+
+                        <Button x:Name="BrowseFiles"
+                                Grid.Column="1" Grid.Row="2"
+                                Margin="5,5,5,5"
+                                Content="Browse Files"
+                                ToolTipService.ShowDuration="5000"
+                                ToolTipService.BetweenShowDelay="10000"
+                                ToolTip="Manually choose XTM generated ZIP or XLSX metric file."
+                                Click="BrowseFiles_Click"/>
+
+                        <TextBox x:Name="XlsxPathDisplay"
+                        Grid.Column="2" Grid.Row="2"
+                        Margin="5,5,5,5"
+                        Background="LightGoldenrodYellow"
+                        Text=""
+                        Grid.ColumnSpan="3"/>
+
+                        <StackPanel x:Name="StackDropSource" AllowDrop="True" Background="LightGray"
+                                    Grid.Column="1" Grid.Row="3"
+                                    Grid.ColumnSpan="3"
+                                    Margin="5,5,5,5"
+                                    Drop="StackDropSource_Drop">
+                            <Label Content="Drop XTM generated ZIP or XLSX metric file here" HorizontalAlignment="Center" Foreground="DarkGray"/>
+                        </StackPanel>
+
+                        <CheckBox x:Name="CheckBox_100" Grid.Column="1" Grid.Row="5" Margin="5,20,5,5">
+                            Ignore 100% matches
+                        </CheckBox>
+
+                        <Button x:Name="Convert" Grid.Column="2" Grid.Row="5"
+                                Margin="5,5,5,5"
+                                Content="Convert"
+                                ToolTipService.ShowDuration="5000"
+                                ToolTipService.BetweenShowDelay="10000"
+                                ToolTip="Start conversion of XTM generated metric file (zipped or in *.xlsx format)into LCX *.txt format."
+                                Click="Convert_Click"/>
+
+                        <TextBlock Grid.Column="3" Grid.Row="4"
+                        Text="Source Language:" Margin="20,0,5,0"/>
+
+                        <ComboBox x:Name="DropdownList" Grid.Column="3" Grid.Row="5"
+                              Margin="5,5,5,30">
+                            <ComboBoxItem IsSelected="True">English (US)</ComboBoxItem>
+                            <ComboBoxItem>Chinese (Simplified)</ComboBoxItem>
+                            <ComboBoxItem>Chinese (Traditional)</ComboBoxItem>
+                            <ComboBoxItem>Czech</ComboBoxItem>
+                            <ComboBoxItem>Dutch</ComboBoxItem>                                                                              
+                            <ComboBoxItem>French (Canada)</ComboBoxItem>
+                            <ComboBoxItem>French (France)</ComboBoxItem>
+                            <ComboBoxItem>German (Germany)</ComboBoxItem>
+                            <ComboBoxItem>Hebrew</ComboBoxItem>
+                            <ComboBoxItem>Italian</ComboBoxItem>
+                            <ComboBoxItem>Japanese</ComboBoxItem>
+                            <ComboBoxItem>Korean</ComboBoxItem>
+                            <ComboBoxItem>Polish</ComboBoxItem>
+                            <ComboBoxItem>Portuguese</ComboBoxItem>
+                            <ComboBoxItem>Portuguese (Brazil)</ComboBoxItem>
+                            <ComboBoxItem>Russian</ComboBoxItem>
+                            <ComboBoxItem>Spanish (Latin America)</ComboBoxItem>
+                            <ComboBoxItem>Spanish (Spain)</ComboBoxItem>
+                        </ComboBox>    
+
+                    </Grid>
+                    
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="XTM to LCX metric Merge'n Convert">
+                <StackPanel x:Name="MergeStack">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="120*"/>
+                            <ColumnDefinition Width="300*"/>
+                            <ColumnDefinition Width="120*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="12"/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="220"/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="40"/>                           
+
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="1" Grid.Row="1"
+                        Text="Location of the folder with XTM metrics"                        
+                        Grid.ColumnSpan ="2"/>
+
+                        <TextBox x:Name="XlsxTargetPathDisplay"
+                        Grid.Column="1" Grid.Row="2"
+                        Margin="5,5,5,5"
+                        Background="LightGoldenrodYellow"
+                        Text=""
+                        Grid.ColumnSpan="3"/>
+
+                        <StackPanel x:Name="StackDropTarget" AllowDrop="True" Background="LightGray"
+                                    Grid.Column="1" Grid.Row="3"
+                                    Grid.ColumnSpan="3"
+                                    Margin="5,5,5,5"
+                                    Drop="StackDropTarget_Drop">
+                            <Label Content="Drop folder with multiple XTM generated metrics here" HorizontalAlignment="Center" Foreground="DarkGray"/>
+                        </StackPanel>
+
+                        <CheckBox x:Name="CheckBox_100_2" Grid.Column="1" Grid.Row="5" Margin="5,10,5,5">
+                            Ignore 100% matches
+                        </CheckBox>
+
+                        <TextBlock Grid.Column="3" Grid.Row="4"
+                        Text="Source Language:" Margin="20,0,5,0"/>
+
+                        <ComboBox x:Name="DropdownList2" Grid.Column="3" Grid.Row="5"
+                              Margin="5,5,5,10">
+                            <ComboBoxItem IsSelected="True">English (US)</ComboBoxItem>
+                            <ComboBoxItem>Chinese (Simplified)</ComboBoxItem>
+                            <ComboBoxItem>Chinese (Traditional)</ComboBoxItem>
+                            <ComboBoxItem>Czech</ComboBoxItem>
+                            <ComboBoxItem>Dutch</ComboBoxItem>
+                            <ComboBoxItem>French (Canada)</ComboBoxItem>
+                            <ComboBoxItem>French (France)</ComboBoxItem>
+                            <ComboBoxItem>German (Germany)</ComboBoxItem>
+                            <ComboBoxItem>Hebrew</ComboBoxItem>
+                            <ComboBoxItem>Italian</ComboBoxItem>
+                            <ComboBoxItem>Japanese</ComboBoxItem>
+                            <ComboBoxItem>Korean</ComboBoxItem>
+                            <ComboBoxItem>Polish</ComboBoxItem>
+                            <ComboBoxItem>Portuguese</ComboBoxItem>
+                            <ComboBoxItem>Portuguese (Brazil)</ComboBoxItem>
+                            <ComboBoxItem>Russian</ComboBoxItem>
+                            <ComboBoxItem>Spanish (Latin America)</ComboBoxItem>
+                            <ComboBoxItem>Spanish (Spain)</ComboBoxItem>
+                        </ComboBox>
+
+                        <Button x:Name="Merge" Grid.Column="2" Grid.Row="5"
+                                Margin="5,5,5,5"                                
+                                Content="Merge and Convert"
+                                ToolTipService.ShowDuration="5000"
+                                ToolTipService.BetweenShowDelay="10000"
+                                ToolTip="Merge selected XTM generated *.XLSX metric files."
+                                Click="Merge_Click"/>
+
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+            
+            <TabItem Header="LTB Report text extractor">
+                <StackPanel x:Name="HtmlStack">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="120*"/>
+                            <ColumnDefinition Width="300*"/>
+                            <ColumnDefinition Width="120*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="12"/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="220"/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="40"/>
+
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="1" Grid.Row="1"
+                        Text="Location of the LTB log file:"                        
+                        Grid.ColumnSpan ="2"/>
+
+                        <Button x:Name="BrowseLTBFiles"
+                                Grid.Column="1" Grid.Row="2"
+                                Margin="5,5,5,5"
+                                Content="Browse Files"
+                                ToolTipService.ShowDuration="5000"
+                                ToolTipService.BetweenShowDelay="10000"
+                                ToolTip="Manually choose LTB log file with .xml estension."
+                                Click="BrowseLTBFiles_Click"/>
+
+                        <TextBox x:Name="HtmlPathDisplay"
+                        Grid.Column="2" Grid.Row="2"
+                        Margin="5,5,5,5"
+                        Background="LightGoldenrodYellow"
+                        Text=""
+                        Grid.ColumnSpan="3"/>
+
+                        <StackPanel x:Name="HtmlDropTarget" AllowDrop="True" Background="LightGray"
+                                    Grid.Column="1" Grid.Row="3"
+                                    Grid.ColumnSpan="3"
+                                    Margin="5,5,5,5"
+                                    Drop="HtmlDropTarget_Drop">
+                            <Label Content="Drop LTB report here" HorizontalAlignment="Center" Foreground="DarkGray"/>
+                        </StackPanel>
+
+                        <Button x:Name="Extract" Grid.Column="2" Grid.Row="5"
+                                Margin="5,5,5,5"                                
+                                Content="Extract"
+                                ToolTipService.ShowDuration="5000"
+                                ToolTipService.BetweenShowDelay="10000"
+                                ToolTip="Extract text segments from LTB log file."
+                                Click="Extract_Click"/>
+                      
+                        
+                        <CheckBox x:Name="CheckBox_Multi" Grid.Column="1" Grid.Row="5" Margin="5,12,5,0" FontWeight="Bold">
+                            MultiTab Support!
+                        </CheckBox>
+
+                    </Grid>
+                </StackPanel>
+
+            </TabItem>
+        </TabControl>
+        <ProgressBar Grid.Row="1" Minimum="0" Name="ProgressBar" Margin="5,5,5,5" IsIndeterminate="False"/>
+    </Grid>
+</Window>
